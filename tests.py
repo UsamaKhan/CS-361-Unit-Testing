@@ -6,7 +6,7 @@ class TestInit(unittest.TestCase):
     # several of these will need to check to see if an exception is raised
     def test_divZero(self):
         with self.assertRaises(ZeroDivisionError, msg="Denominator of zero fails to raise DivByZero"):
-            a = Fraction(1, 0)
+            Fraction(1, 0)
 
     def test_default(self):
         a = Fraction()
@@ -26,15 +26,16 @@ class TestInit(unittest.TestCase):
         self.assertTrue(a.numerator == arg1 & a.denominator == arg2,
                         "Fails to initialize correctly with two arguments")
 
+    # noinspection PyArgumentList
     def test_threeArg(self):
         with self.assertRaises(TypeError, msg="Three args provided"):
-            a = Fraction(1, 2, 3)
+            Fraction(1, 2, 3)
 
     def test_invalidArg(self):
         with self.assertRaises(TypeError, msg="Invalid argument"):
-            a = Fraction("hello")
+            Fraction("hello")
 
-    def test_negDenom(self):
+    def test_negDenominator(self):
         arg1 = 1
         arg2 = -2
         a = Fraction(arg1, arg2)
@@ -64,4 +65,3 @@ class TestStr(unittest.TestCase):
         a = Fraction(-1, 2)
         self.assertEqual("-1/2", a.__str__(),
                          "Fails to display negative fraction")
-
