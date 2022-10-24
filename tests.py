@@ -224,3 +224,39 @@ class TestMul(unittest.TestCase):
     def test_mul_type(self):
         with self.assertRaises(TypeError, msg="Fails to multiply invalid type"):
             self.a * "hello"
+
+
+class TestTruediv(unittest.TestCase):
+    def setUp(self) -> None:
+        self.a = Fraction(1, 2)
+        self.b = Fraction(1, 3)
+        self.c = Fraction(2, 4)
+        self.d = Fraction(-1, 2)
+
+    def test_truediv(self):
+        self.assertEqual(Fraction(3, 2), self.a / self.b,
+                         "Fails to divide fractions")
+
+    def test_truediv_self(self):
+        self.assertEqual(Fraction(1, 1), self.a / self.a,
+                         "Fails to divide fraction by itself")
+
+    def test_truediv_reduced(self):
+        self.assertEqual(Fraction(1, 1), self.a / self.c,
+                         "Fails to divide fractions when reduced")
+
+    def test_truediv_neg(self):
+        self.assertEqual(Fraction(-2, 1), self.a / self.d,
+                         "Fails to divide negative fractions")
+
+    def test_truediv_int(self):
+        self.assertEqual(Fraction(1, 4), self.a / 2,
+                         "Fails to divide int by fraction")
+
+    def test_truediv_float(self):
+        self.assertEqual(Fraction(1, 1), self.a / 0.5,
+                         "Fails to divide float by fraction")
+
+    def test_truediv_type(self):
+        with self.assertRaises(TypeError, msg="Fails to divide invalid type"):
+            self.a / "hello"
