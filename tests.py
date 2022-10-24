@@ -152,3 +152,39 @@ class TestAdd(unittest.TestCase):
     def test_add_type(self):
         with self.assertRaises(TypeError, msg="Fails to add invalid type"):
             self.a + "hello"
+
+
+class TestSub(unittest.TestCase):
+    def setUp(self) -> None:
+        self.a = Fraction(1, 2)
+        self.b = Fraction(1, 3)
+        self.c = Fraction(2, 4)
+        self.d = Fraction(-1, 2)
+
+    def test_sub(self):
+        self.assertEqual(Fraction(1, 6), self.a - self.b,
+                         "Fails to subtract fractions")
+
+    def test_sub_self(self):
+        self.assertEqual(Fraction(0, 1), self.a - self.a,
+                         "Fails to subtract fraction from itself")
+
+    def test_sub_reduced(self):
+        self.assertEqual(Fraction(0, 1), self.a - self.c,
+                         "Fails to subtract fractions when reduced")
+
+    def test_sub_neg(self):
+        self.assertEqual(Fraction(1, 1), self.a - self.d,
+                         "Fails to subtract negative fractions")
+
+    def test_sub_int(self):
+        self.assertEqual(Fraction(-3, 2), self.a - 2,
+                         "Fails to subtract int from fraction")
+
+    def test_sub_float(self):
+        self.assertEqual(Fraction(0, 1), self.a - 0.5,
+                         "Fails to subtract float from fraction")
+
+    def test_sub_type(self):
+        with self.assertRaises(TypeError, msg="Fails to subtract invalid type"):
+            self.a - "hello"
