@@ -65,3 +65,25 @@ class TestStr(unittest.TestCase):
         a = Fraction(-1, 2)
         self.assertEqual("-1/2", a.__str__(),
                          "Fails to display negative fraction")
+
+
+class TestFloat(unittest.TestCase):
+    def test_float(self):
+        a = Fraction(3, 4)
+        self.assertEqual(0.75, a.__float__(),
+                         "Fails to convert to float")
+
+    def test_float_int(self):
+        a = Fraction(1, 1)
+        self.assertEqual(1.0, a.__float__(),
+                         "Fails to convert to float when denominator is 1")
+
+    def test_float_neg(self):
+        a = Fraction(-1, 2)
+        self.assertEqual(-0.5, a.__float__(),
+                         "Fails to convert negative fraction to float")
+
+    def test_float_zero(self):
+        a = Fraction(0, 1)
+        self.assertEqual(0.0, a.__float__(),
+                         "Fails to convert zero to float")
