@@ -188,3 +188,39 @@ class TestSub(unittest.TestCase):
     def test_sub_type(self):
         with self.assertRaises(TypeError, msg="Fails to subtract invalid type"):
             self.a - "hello"
+
+
+class TestMul(unittest.TestCase):
+    def setUp(self) -> None:
+        self.a = Fraction(1, 2)
+        self.b = Fraction(1, 3)
+        self.c = Fraction(2, 4)
+        self.d = Fraction(-1, 2)
+
+    def test_mul(self):
+        self.assertEqual(Fraction(1, 6), self.a * self.b,
+                         "Fails to multiply fractions")
+
+    def test_mul_self(self):
+        self.assertEqual(Fraction(1, 4), self.a * self.a,
+                         "Fails to multiply fraction by itself")
+
+    def test_mul_reduced(self):
+        self.assertEqual(Fraction(1, 4), self.a * self.c,
+                         "Fails to multiply fractions when reduced")
+
+    def test_mul_neg(self):
+        self.assertEqual(Fraction(-1, 4), self.a * self.d,
+                         "Fails to multiply negative fractions")
+
+    def test_mul_int(self):
+        self.assertEqual(Fraction(1, 1), self.a * 2,
+                         "Fails to multiply int by fraction")
+
+    def test_mul_float(self):
+        self.assertEqual(Fraction(1, 4), self.a * 0.5,
+                         "Fails to multiply float by fraction")
+
+    def test_mul_type(self):
+        with self.assertRaises(TypeError, msg="Fails to multiply invalid type"):
+            self.a * "hello"
