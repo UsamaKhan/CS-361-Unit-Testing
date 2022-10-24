@@ -87,3 +87,32 @@ class TestFloat(unittest.TestCase):
         a = Fraction(0, 1)
         self.assertEqual(0.0, a.__float__(),
                          "Fails to convert zero to float")
+
+
+class TestEq(unittest.TestCase):
+    def setUp(self) -> None:
+        self.a = Fraction(1, 2)
+        self.b = Fraction(1, 2)
+        self.c = Fraction(2, 4)
+        self.d = Fraction(1, 3)
+        self.e = Fraction(-1, 2)
+
+    def test_equal(self):
+        self.assertTrue(self.a == self.b,
+                        "Fails to compare equal fractions")
+
+    def test_equal_reduced(self):
+        self.assertTrue(self.a == self.c,
+                        "Fails to compare equal fractions when reduced")
+
+    def test_not_equal(self):
+        self.assertFalse(self.a == self.d,
+                         "Fails to compare unequal fractions")
+
+    def test_not_equal_neg(self):
+        self.assertFalse(self.a == self.e,
+                         "Fails to compare unequal fractions")
+
+    def test_not_equal_type(self):
+        self.assertFalse(self.a == 1,
+                         "Fails to compare unequal types")
