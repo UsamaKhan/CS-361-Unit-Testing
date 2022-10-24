@@ -116,3 +116,39 @@ class TestEq(unittest.TestCase):
     def test_not_equal_type(self):
         self.assertFalse(self.a == 1,
                          "Fails to compare unequal types")
+
+
+class TestAdd(unittest.TestCase):
+    def setUp(self) -> None:
+        self.a = Fraction(1, 2)
+        self.b = Fraction(1, 3)
+        self.c = Fraction(2, 4)
+        self.d = Fraction(-1, 2)
+
+    def test_add(self):
+        self.assertEqual(Fraction(5, 6), self.a + self.b,
+                         "Fails to add fractions")
+
+    def test_add_self(self):
+        self.assertEqual(Fraction(1, 1), self.a + self.a,
+                         "Fails to add fraction to itself")
+
+    def test_add_reduced(self):
+        self.assertEqual(Fraction(1, 1), self.a + self.c,
+                         "Fails to add fractions when reduced")
+
+    def test_add_neg(self):
+        self.assertEqual(Fraction(0, 1), self.a + self.d,
+                         "Fails to add negative fractions")
+
+    def test_add_int(self):
+        self.assertEqual(Fraction(5, 2), self.a + 2,
+                         "Fails to add int to fraction")
+
+    def test_add_float(self):
+        self.assertEqual(Fraction(1, 1), self.a + 0.5,
+                         "Fails to add float to fraction")
+
+    def test_add_type(self):
+        with self.assertRaises(TypeError, msg="Fails to add invalid type"):
+            self.a + "hello"
